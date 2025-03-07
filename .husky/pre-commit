@@ -1,1 +1,1 @@
-npx prettier write scr
+npx lint-staged
