@@ -1,6 +1,6 @@
-import SidebarButton from './SidebarButton';
-import HomeIcon from '../assets/icons/home.svg?react';
-import TasksIcon from '../assets/icons/tasks.svg?react';
+import SidebarButton from "./SidebarButton";
+import HomeIcon from "../assets/icons/home.svg?react";
+import TasksIcon from "../assets/icons/tasks.svg?react";
 
 const Sidebar = () => {
   return (
@@ -8,7 +8,7 @@ const Sidebar = () => {
       <div className="space-y-4 px-8 py-6">
         <h1 className="text-xl font-semibold text-[#00ADB5]">Task Manager</h1>
         <p>
-          Um simples{' '}
+          Um simples{" "}
           <span className="text-[#00ADB5]">organizador de tarefas</span>
         </p>
       </div>
