@@ -1,5 +1,5 @@
 import CheckIcon from "../assets/icons/check.svg?react";
-import LoaderIcon from "../assets/icons/loader.svg?react";
+import LoadingIcon from "../assets/icons/loading.svg?react";
 import DetailsIcon from "../assets/icons/details.svg?react";
 
 const TaskItem = ({ task }) => {
@@ -30,7 +30,7 @@ const TaskItem = ({ task }) => {
           />
           {task.status === "done" && <CheckIcon />}
           {task.status === "in_progress" && (
-            <LoaderIcon className="text-brand-white animate-spin" />
+            <LoadingIcon className="text-brand-white h-6 w-6 animate-spin" />
           )}
         </label>
 
