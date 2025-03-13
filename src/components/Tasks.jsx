@@ -75,7 +75,12 @@ const Tasks = () => {
           </Button>
         </div>
       </div>
-      <AddTaskDialog isOpen={addTaskDialogIsOpen} />
+
+      <AddTaskDialog
+        isOpen={addTaskDialogIsOpen}
+        handleClose={() => SetAddTaskDialogIsOpen(false)}
+      />
+
       {/* LISTA DE TAREFAS */}
       <div className="rounded-xl bg-white p-6">
         {/* MANHÃ */}
