@@ -1,7 +1,7 @@
 import {
   CheckIcon,
-  LoadingIcon,
   DetailsIcon,
+  LoadingIcon,
   TrashIcon,
 } from "../assets/icons";
 import Button from "../components/Button";
