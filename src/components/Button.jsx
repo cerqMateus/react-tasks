@@ -7,13 +7,13 @@ const Button = ({
 }) => {
   const getVariantClasses = () => {
     if (variant === "ghost") {
-      return "text-[#818181] bg-transparent";
+      return "text-brand-dark_gray bg-transparent";
     }
     if (variant === "primary") {
-      return "bg-[#00ADB5] text-white";
+      return "bg-brand-primary text-white";
     }
     if (variant === "secondary") {
-      return "bg-[#EEEEEE] text-[#35383E]";
+      return "bg-brand-light_gray text-brand-dark_blue";
     }
   };
 
