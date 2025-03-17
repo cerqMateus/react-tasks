@@ -1,7 +1,6 @@
 import "./AddTaskDialog.css";
 
-import { useEffect, useRef } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import { v4 } from "uuid";
@@ -11,16 +10,50 @@ import Input from "./Input";
 import TimeSelect from "./TimeSelect";
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
-  const [time, setTime] = useState("morning");
   const [title, setTitle] = useState("");
+  const [time, setTime] = useState("morning");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const nodeRef = useRef();
 
-  const HandleSaveClick = () => {
-    if (!title.trim || !time || !description) {
-      alert("Preencha todos os campos");
+  useEffect(() => {
+    if (!isOpen) {
+      setTitle("");
+      setTime("morning");
+      setDescription("");
     }
+  }, [isOpen]);
+
+  const handleSaveClick = () => {
+    const newErrors = [];
+
+    if (!title.trim()) {
+      newErrors.push({
+        inputName: "title",
+        message: "O título é obrigatório.",
+      });
+    }
+
+    if (!time.trim()) {
+      newErrors.push({
+        inputName: "time",
+        message: "O horário é obrigatório.",
+      });
+    }
+
+    if (!description.trim()) {
+      newErrors.push({
+        inputName: "description",
+        message: "A descrição é obrigatória.",
+      });
+    }
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     handleSubmit({
       id: v4(),
       title,
@@ -28,23 +61,21 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
       description,
       status: "not_started",
     });
-
     handleClose();
   };
 
-  useEffect(() => {
-    if (!isOpen) {
-      setTime("");
-      setTitle("");
-      setDescription("");
-    }
-  }, [isOpen]);
+  const titleError = errors.find((error) => error.inputName === "title");
+  const timeError = errors.find((error) => error.inputName === "time");
+  const descriptionError = errors.find(
+    (error) => error.inputName === "description"
+  );
+
   return (
     <CSSTransition
       nodeRef={nodeRef}
       in={isOpen}
       timeout={500}
-      className="add-task-dialog"
+      classNames="add-task-dialog"
       unmountOnExit
     >
       <div>
@@ -53,13 +84,15 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
             ref={nodeRef}
             className="fixed bottom-0 left-0 top-0 flex h-screen w-screen items-center justify-center backdrop-blur"
           >
+            {/* DIALOG */}
             <div className="rounded-xl bg-white p-5 text-center shadow">
-              <h2 className="text-xl font-semibold text-[#35353E]">
-                Nova tarefa
+              <h2 className="text-xl font-semibold text-[#35383E]">
+                Nova Tarefa
               </h2>
               <p className="mb-4 mt-1 text-sm text-[#9A9C9F]">
                 Insira as informações abaixo
               </p>
+
               <div className="flex w-[336px] flex-col space-y-4">
                 <Input
                   id="title"
@@ -67,18 +100,24 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                   placeholder="Insira o título da tarefa"
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
+                  errorMessage={titleError?.message}
                 />
+
                 <TimeSelect
                   value={time}
                   onChange={(event) => setTime(event.target.value)}
+                  errorMessage={timeError?.message}
                 />
+
                 <Input
                   id="description"
                   label="Descrição"
                   placeholder="Descreva a tarefa"
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
+                  errorMessage={descriptionError?.message}
                 />
+
                 <div className="flex gap-3">
                   <Button
                     size="large"
@@ -91,9 +130,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                   <Button
                     size="large"
                     className="w-full"
-                    onClick={() => {
-                      HandleSaveClick();
-                    }}
+                    onClick={handleSaveClick}
                   >
                     Salvar
                   </Button>
@@ -103,7 +140,6 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
           </div>,
           document.body
         )}
-        ;
       </div>
     </CSSTransition>
   );
