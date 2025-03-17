@@ -77,6 +77,9 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full"
                     onClick={() => {
+                      if (!title.trim() || !time || !description) {
+                        alert("Preencha todos os campos");
+                      }
                       handleSubmit({
                         id: v4(),
                         title,
