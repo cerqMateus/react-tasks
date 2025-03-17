@@ -17,6 +17,21 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
 
   const nodeRef = useRef();
 
+  const HandleSaveClick = () => {
+    if (!title.trim || !time || !description) {
+      alert("Preencha todos os campos");
+    }
+    handleSubmit({
+      id: v4(),
+      title,
+      time,
+      description,
+      status: "not_started",
+    });
+
+    handleClose();
+  };
+
   useEffect(() => {
     if (!isOpen) {
       setTime("");
@@ -77,18 +92,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full"
                     onClick={() => {
-                      if (!title.trim() || !time || !description) {
-                        alert("Preencha todos os campos");
-                      }
-                      handleSubmit({
-                        id: v4(),
-                        title,
-                        time,
-                        description,
-                        status: "not_started",
-                      });
-
-                      handleClose();
+                      HandleSaveClick();
                     }}
                   >
                     Salvar
