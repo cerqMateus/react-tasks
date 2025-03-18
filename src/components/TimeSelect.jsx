@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import InputLabel from "./InputLabel";
 
 const TimeSelect = (props) => {
@@ -20,6 +22,10 @@ const TimeSelect = (props) => {
       )}
     </div>
   );
+};
+
+TimeSelect.propTypes = {
+  errorMessage: PropTypes.string,
 };
 
 export default TimeSelect;
