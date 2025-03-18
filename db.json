@@ -1,11 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "0cdd49ce-e513-430d-a90c-a17f02fea4a1",
-      "title": "Lavar o carro",
-      "time": "afternoon",
-      "description": "Lavar carro",
-      "status": "not_started"
-    }
-  ]
+  "tasks": []
 }

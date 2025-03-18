@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { toast } from "sonner";
 
 import {
   CheckIcon,
@@ -8,7 +10,24 @@ import {
 } from "../assets/icons";
 import Button from "../components/Button";
 
-const TaskItem = ({ task, handleCheckBoxClick, handleDeleteClick }) => {
+const TaskItem = ({ task, handleCheckBoxClick, onDeleteSucces }) => {
+  const [deleteTaskIsLoading, setDeleteTaskIsLoading] = useState(false);
+
+  const handleDeleteClick = async () => {
+    setDeleteTaskIsLoading(true);
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      setDeleteTaskIsLoading(false);
+      return toast.error(
+        "Erro ao deletar a tarefa. Por favor, tente novamente"
+      );
+    }
+    onDeleteSucces(task.id);
+    setDeleteTaskIsLoading(false);
+  };
+
   const getStatusClasses = () => {
     if (task.status === "done") {
       return "bg-brand-primary  text-brand-primary";
@@ -49,9 +68,14 @@ const TaskItem = ({ task, handleCheckBoxClick, handleDeleteClick }) => {
         <Button
           color="ghost"
           className="text-brand-text_gray"
-          onClick={() => handleDeleteClick(task.id)}
+          onClick={handleDeleteClick}
+          disabled={deleteTaskIsLoading}
         >
-          {<TrashIcon />}
+          {deleteTaskIsLoading ? (
+            <LoadingIcon className="h-6 w-6 animate-spin text-brand-text_gray" />
+          ) : (
+            <TrashIcon />
+          )}
         </Button>
         <a href="#">{<DetailsIcon />}</a>
       </div>
