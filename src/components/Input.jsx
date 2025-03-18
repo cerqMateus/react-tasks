@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import InputLabel from "./InputLabel";
 
 const Input = ({ label, errorMessage, ...rest }) => {
@@ -13,6 +15,12 @@ const Input = ({ label, errorMessage, ...rest }) => {
       )}
     </div>
   );
+};
+
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  id: PropTypes.string.isRequired,
 };
 
 export default Input;
