@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import {
   CheckIcon,
   DetailsIcon,
@@ -55,6 +57,18 @@ const TaskItem = ({ task, handleCheckBoxClick, handleDeleteClick }) => {
       </div>
     </div>
   );
+};
+
+TaskItem.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    time: PropTypes.oneOf(["morning", "afternoon", "night"]),
+    title: PropTypes.string.isRequired,
+    status: PropTypes.oneOf(["done", "in_progress", "not_started"]),
+  }).isRequired,
+  handleCheckBoxClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
 };
 
 export default TaskItem;
