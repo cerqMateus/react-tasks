@@ -1,45 +1,73 @@
 {
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Estudar React",
       "description": "Estudar React para finalizar o projeto do FSC",
       "time": "morning",
       "status": "done"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Cortar o cabelo",
       "description": "Ir no salão de beleza e cortar o cabelo",
       "time": "afternoon",
       "status": "done"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Estudar Inglês",
       "description": "Estudar Inglês para melhorar a conversação",
       "time": "evening",
       "status": "in_progress"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Ir na academia",
       "description": "Ir na academia e fazer exercícios",
       "time": "morning",
       "status": "in_progress"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Fazer compras",
       "description": "Ir no mercado e fazer compras para casa",
       "time": "afternoon",
       "status": "not_started"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Assistir série",
       "description": "Assistir série na Netflix",
       "time": "evening",
+      "status": "not_started"
+    },
+    {
+      "id": "0922ae4f-ba60-4620-9ae9-b6d00730d1a7",
+      "title": "teste",
+      "time": "morning",
+      "description": "sd",
+      "status": "not_started"
+    },
+    {
+      "id": "007fb66b-cd75-4799-b044-cef0ef3bded6",
+      "title": "a",
+      "time": "morning",
+      "description": "sd",
+      "status": "not_started"
+    },
+    {
+      "id": "67463758-d8f3-4c52-a477-08262520fa2e",
+      "title": "agora vai",
+      "time": "morning",
+      "description": "agr vai",
+      "status": "not_started"
+    },
+    {
+      "id": "402e08b6-2b66-48cd-99dd-316c2903fde9",
+      "title": "tentes",
+      "time": "morning",
+      "description": "fas",
       "status": "not_started"
     }
   ]

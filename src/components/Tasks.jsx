@@ -63,7 +63,14 @@ const Tasks = () => {
     toast.success("Tarefa deletada com sucesso");
   };
 
-  const handleAddTask = (task) => {
+  const handleAddTask = async (task) => {
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+    });
+    if (!response.ok) {
+      return toast.error("Erro ao adicionar tarefa");
+    }
     setTasks([...tasks, task]);
     toast.success("Tarefa adicionada com sucesso");
   };
