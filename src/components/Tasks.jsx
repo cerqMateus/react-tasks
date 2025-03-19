@@ -63,14 +63,7 @@ const Tasks = () => {
     toast.success("Tarefa deletada com sucesso");
   };
 
-  const handleAddTask = async (task) => {
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(task),
-    });
-    if (!response.ok) {
-      return toast.error("Erro ao adicionar tarefa");
-    }
+  const onTaskSubmitSuccess = async (task) => {
     setTasks([...tasks, task]);
     toast.success("Tarefa adicionada com sucesso");
   };
@@ -104,7 +97,7 @@ const Tasks = () => {
       <AddTaskDialog
         isOpen={addTaskDialogIsOpen}
         handleClose={() => SetAddTaskDialogIsOpen(false)}
-        handleSubmit={handleAddTask}
+        onSubmitSucces={onTaskSubmitSuccess}
       />
 
       {/* LISTA DE TAREFAS */}

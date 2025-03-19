@@ -1,18 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "9eb584c4-2534-489c-9854-ed1a4c2eb5c1",
-      "title": "Comprar roupas",
-      "time": "afternoon",
-      "description": "Roupas pro Niver",
-      "status": "not_started"
-    },
-    {
-      "id": "a171b8a3-8760-4739-ab5a-117953e09416",
-      "title": "dasd",
-      "time": "morning",
-      "description": "dasda",
-      "status": "not_started"
-    }
-  ]
+  "tasks": []
 }

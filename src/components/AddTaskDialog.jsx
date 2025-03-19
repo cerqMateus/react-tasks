@@ -4,17 +4,20 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import { toast } from "sonner";
 import { v4 } from "uuid";
 
+import { LoadingIcon } from "../assets/icons";
 import Button from "./Button";
 import Input from "./Input";
 import TimeSelect from "./TimeSelect";
 
-const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
+const AddTaskDialog = ({ isOpen, handleClose, onSubmitSucces }) => {
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("morning");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const nodeRef = useRef();
 
@@ -26,7 +29,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     }
   }, [isOpen]);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     const newErrors = [];
 
     if (!title.trim()) {
@@ -55,13 +58,18 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
       return;
     }
 
-    handleSubmit({
-      id: v4(),
-      title,
-      time,
-      description,
-      status: "not_started",
+    const task = { id: v4(), title, time, description, status: "not_started" };
+    setIsLoading(true);
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
     });
+    if (!response.ok) {
+      setIsLoading(false);
+      return toast.error("Erro ao adicionar tarefa");
+    }
+    setIsLoading(false);
+    onSubmitSucces(task);
     handleClose();
   };
 
@@ -132,7 +140,11 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full"
                     onClick={handleSaveClick}
+                    disable={isLoading}
                   >
+                    {isLoading && (
+                      <LoadingIcon className="mr-2 h-6 w-6 animate-spin text-brand-light_gray" />
+                    )}
                     Salvar
                   </Button>
                 </div>

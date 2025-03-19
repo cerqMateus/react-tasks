@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { ArrowLeft, ChevronRightIcon, TrashIcon } from "../assets/icons";
 import Button from "../components/Button";
@@ -10,6 +10,7 @@ import TimeSelect from "../components/TimeSelect";
 
 const TaskDetailsPage = () => {
   const navigate = useNavigate();
+
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -44,12 +45,13 @@ const TaskDetailsPage = () => {
             </button>
             <div>
               <div className="flex items-center gap-1 text-xs">
-                <span
+                <Link
+                  to="/"
                   onClick={handleBackClick}
                   className="cursor-pointer text-brand-text_gray"
                 >
                   Minhas tarefas
-                </span>
+                </Link>
                 <ChevronRightIcon className="text-brand-text_gray" />
                 <span className="font-semibold text-brand-primary">
                   {task?.title}
@@ -59,7 +61,10 @@ const TaskDetailsPage = () => {
             </div>
           </div>
           {/* Parte da direita */}
-          <Button className="h-fit self-end bg-brand-danger">
+          <Button
+            onClick={handleBackClick}
+            className="h-fit self-end bg-brand-danger"
+          >
             <TrashIcon />
             Deletar tarefa
           </Button>
@@ -68,15 +73,19 @@ const TaskDetailsPage = () => {
         {/* Dados da tarefa */}
         <div className="space-y-6 rounded-xl bg-brand-white p-6">
           <div>
-            <Input id={task?.id} label={"Título"} value={task?.title} />
+            <Input id={task?.id} label={"Título"} defaultValue={task?.title} />
           </div>
 
           <div>
-            <TimeSelect value={task?.time} />
+            <TimeSelect defaultValue={task?.time} />
           </div>
 
           <div>
-            <Input id={task?.id} label={"Título"} value={task?.description} />
+            <Input
+              id={task?.id}
+              label={"Título"}
+              defaultValue={task?.description}
+            />
           </div>
         </div>
         <div className="flex w-full justify-end gap-3">
