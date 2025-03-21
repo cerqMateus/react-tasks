@@ -158,9 +158,6 @@ const TaskDetailsPage = () => {
           </div>
         </div>
         <div className="flex w-full justify-end gap-3">
-          <Button size="large" color="secondary">
-            Cancelar
-          </Button>
           <Button
             size="large"
             color="primary"
